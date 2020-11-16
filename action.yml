@@ -1,0 +1,32 @@
+# action.yml
+name: 'ECS Service Update'
+description: 'Update a existing ECS service with Image'
+inputs:
+  task_family:
+    description: 'Task family'
+    required: true
+  task_revision:
+    description: 'Task revision'
+    required: true
+  image_name:
+    description: 'Image name'
+    required: true
+  tag:
+    description: "Image tag"
+    required: true
+  cluster:
+    description: "ECS Cluster Name"
+    required: true
+  service_name:
+    description: "ECS Service Name"
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.task_family }}
+    - ${{ inputs.task_revision }}
+    - ${{ inputs.image_name }}
+    - ${{ inputs.tag }}
+    - ${{ inputs.cluster }}
+    - ${{ inputs.service_name }}
